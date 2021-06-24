@@ -38,9 +38,21 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
+    'django_cas_ng',
     'drf_yasg',
     'drf',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas_ng.backends.CASBackend',
+)
+
+# 也就是LMS的地址
+CAS_SERVER_URL = 'http://127.0.0.1:8000'
+CAS_VERSION = '3'
+# 存入所有CAS 服务端返回的user数据。
+CAS_APPLY_ATTRIBUTES_TO_USER = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -48,7 +60,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
@@ -71,6 +83,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_cas_ng.middleware.CASMiddleware',
 ]
 
 ROOT_URLCONF = 'angdjango.urls'

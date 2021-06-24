@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import django_cas_ng
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
@@ -45,4 +46,8 @@ urlpatterns = [
     path('login/', obtain_jwt_token),  # jwt的认证接口
     path('refresh/', refresh_jwt_token),
     path('verify/', verify_jwt_token),
+
+    path('cas_login/', django_cas_ng.views.LoginView.as_view(), name='cas_ng_login'),
+    path('cas_logout/', django_cas_ng.views.LogoutView.as_view(), name='cas_ng_logout'),
+
 ]
