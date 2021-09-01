@@ -47,7 +47,7 @@ urlpatterns = [
     path('refresh/', refresh_jwt_token),
     path('verify/', verify_jwt_token),
 
-    path('cas_login/', django_cas_ng.views.LoginView.as_view(), name='cas_ng_login'),
-    path('cas_logout/', django_cas_ng.views.LogoutView.as_view(), name='cas_ng_logout'),
+    # path('cas_login/', django_cas_ng.views.LoginView.as_view(), name='cas_ng_login'),
+    # path('cas_logout/', django_cas_ng.views.LogoutView.as_view(), name='cas_ng_logout'),
 
 ]
